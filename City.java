@@ -2,23 +2,24 @@
  
  **/
  //package GameLogic;
- 
+ import java.util.*;
  
  public class City
  {
    public int population;
+   public ArrayList<Resource> resources;
    public ProductionRule rule;
-   public Storage storage;
    public String name;
    public int satisfaction;
      
-   public City(String special, String n)
+   public City(Resource r, String n)
    {
      // set initial population to 1000
 	 System.out.println("Initializing city...");
-     population = 10000;
-	 storage = new Storage(20,20);
-	 rule = new ProductionRule(special);
+     population = 10000;	 
+	 rule = new ProductionRule(r.name);
+	 resources = new ArrayList<Resource>();
+	 resources.add(r);
 	 name = n;
 	 satisfaction = 50;
    }
