@@ -39,14 +39,24 @@
 	 resources.add(resource);
 	 temp = new City(resource, "La Jolla");
 	 cities.add(temp);
+	 
+	 resource = new Resource("Crab");
+	 resources.add(resource);
+	 temp = new City(resource, "New Port");
+	 cities.add(temp);
 
 	 
 	 storage = new Storage(cities,resources);
      
 	 // set distances between cities
-     storage.setCityDist("Santa Cruz", "Redwood City", 1);
-     storage.setCityDist("Redwood City", "La Jolla", 1);	
-     storage.setCityDist("Redwood City", "Coppermine", 1);		 
+     storage.setCityDist(cities.get(1), cities.get(0), 1);
+     storage.setCityDist(cities.get(0), cities.get(2), 1);	
+     storage.setCityDist(cities.get(0), cities.get(3), 1);		
+
+	 storage.setCityDist(cities.get(1), cities.get(3), 1);
+	 storage.setCityDist(cities.get(1), cities.get(4), 1);
+	 
+     storage.setCityDegree();	 
 	 	 
 	 // initializaing time; progress by month
 	 time = 0;

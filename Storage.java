@@ -5,12 +5,36 @@
  
  import java.util.*;
  
+ class Pair<K,V>
+ {
+   private K key;
+   private V value;
+
+   public Pair(K key, V value)
+   {
+     this.key = key;
+	 this.value = value;
+   }
+
+   public K getKey()
+   {
+     return key;
+   }
+   
+   public V getValue()
+   {
+     return value;
+   }
+   
+ }
+ 
  public class Storage
  {   
    private int [][] resourceMap;
    private int [][] distMap;
-   private HashMap<String, Integer> cityDic;
-   private HashMap<String, Integer> resourceDic;
+   public int [][] degMap;
+   private ArrayList<City> cityDic;
+   private ArrayList<Resource> resourceDic;
    private int cityCur;
    private int resourceCur;   
    
@@ -24,72 +48,101 @@
 	 
      resourceMap = new int[clist.size()][rlist.size()];
 	 distMap = new int [clist.size()][clist.size()];
+	 degMap = new int [clist.size()][clist.size()];
 	 
-	 cityDic = new HashMap<String, Integer>();
-	 resourceDic = new HashMap<String, Integer>();
-	 
-	 for(int i=0;i<clist.size();i++)
-	 {
-	   assignCity(clist.get(i).name);
-	 }
-	 
-	 for(int i=0;i<rlist.size();i++)
-	 {
-	   assignResource(rlist.get(i).name);
-	 }
-	 
+	 cityDic = clist;
+	 resourceDic = rlist;
+	 	 
 	 // assign each city its own available starting resource
 	 for(int i=0;i<clist.size();i++)
 	 {
-	   resourceMap[getCity(clist.get(i).name)][getResource(clist.get(i).resources.get(0).name)] = 1;
+	   resourceMap[getCity(cityDic.get(i))][getResource(cityDic.get(i).resources.get(0))] = 1;
 	 }
 	 
    }
    
+   // **implement degree traversal algorithm here to obtain all available resources to all city 
+   public void setCityDegree()
+   {
+     // Need to implement breadth-first search here
+     for(int i=0;i<degMap.length;i++)
+	 {
+	   for(int j=0;j<degMap[i].length;j++)
+	   {
+	     degMap[i][j] = getDeg(i,j);
+	     degMap[j][i] = degMap[i][j];
+	   }
+	 }	 
+   }
    
-   public void setCityDist(String city1, String city2, int dist)
+   public int getDeg(int i, int j)
+   {     
+     LinkedList<Integer> queue = new LinkedList<Integer>();
+	 // <City, degree>
+	 Hashtable<Integer, Integer> set = new Hashtable<Integer, Integer>();
+	 int deg = 0;
+	 int cur = i;
+	 
+	 queue.add(i);
+	 set.put(i,deg);
+	 while(queue.size() > 0)
+	 {
+	   for(int k=0;k<distMap.length;k++)
+	   {
+	     if(distMap[cur][k]!=0)
+	     {
+		   queue.add(k);
+		   set.put(k,set.get(cur)+1);
+		 }
+	   }
+	   if(queue.contains(j))
+	   {
+	     queue.clear();
+	   }
+	   else
+	   {
+	     cur = queue.poll();
+	   }
+	 }
+	 
+	 return set.get(j);
+   }
+   
+   public void setCityDist(City city1, City city2, int dist)
    {
      distMap[getCity(city1)][getCity(city2)] = dist;
 	 distMap[getCity(city2)][getCity(city1)] = dist;
+	 // set degree
+	 degMap[getCity(city1)][getCity(city2)] = 1;
+	 degMap[getCity(city2)][getCity(city1)] = 1;
    }
    
-   public int getCityDist(String city1, String city2)
+   public int getCityDist(City city1, City city2)
    {
      return distMap[getCity(city1)][getCity(city2)];
    }
    
-   public int getCityResource(String city, String resource)
+   public int getCityResource(City city, Resource resource)
    {
 	 return resourceMap[getCity(city)][getResource(resource)];
    }
    
-   private int getCity(String city)
+   private int getCity(City city)
    {
-     Integer v = cityDic.get(city);
+     Integer v = cityDic.indexOf(city);
 
 	 return (int) v; 	 
    }
    
-   private int getResource(String resource)
+   private int getResource(Resource resource)
    {
-     Integer v = resourceDic.get(resource);
+     Integer v = resourceDic.indexOf(resource);
 
 	 return (int) v; 	 
    }
    
-   private int assignCity(String name)
-   {
-     cityDic.put(name, cityCur);
-	 cityCur++;
-     return cityDic.get(name);
-   }
+
    
-   private int assignResource(String name)
-   {
-     resourceDic.put(name, resourceCur);
-	 resourceCur++;
-     return resourceDic.get(name);
-   }
    
    
 

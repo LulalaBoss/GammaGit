@@ -33,7 +33,7 @@
 	 while(testOn)
 	 {
 	   System.out.println("\nCommand: 0 - check status");
-	   System.out.println("         1 - check Stash");
+	   System.out.println("         1 - map");
 	   System.out.println("         2 - end turn");
 	   System.out.println("         3 - display resource/city");
 	   System.out.println("         4 - end");
@@ -56,7 +56,8 @@
 	   }
 	   else if(command.equals("1"))
 	   {
-	     checkStash();
+	     //checkStash();
+		 map();
 	   }
 	   else if(command.equals("2"))
 	   {
@@ -74,6 +75,18 @@
 	 }
 	 
 	 
+   }
+   
+   public void map()
+   {
+     System.out.println("Map:");
+	 for(int i=0;i<newWorld.cities.size();i++)
+	 {
+	   for(int j=0;j<newWorld.cities.size();j++)
+	   {
+	     System.out.println(newWorld.cities.get(i).name + " : " + newWorld.cities.get(j).name + " - " + newWorld.storage.degMap[i][j]);
+	   }
+	 } 
    }
    
    public void endTurn()
@@ -102,7 +115,7 @@
 	   System.out.println("\n"+ newWorld.cities.get(i).name + ": ");
 	   for(int k=0;k<newWorld.resources.size();k++)
 	   {
-	     System.out.println("    "+newWorld.resources.get(k).name + " - " + newWorld.storage.getCityResource(newWorld.cities.get(i).name,newWorld.resources.get(k).name));
+	     System.out.println("    "+newWorld.resources.get(k).name + " - " + newWorld.storage.getCityResource(newWorld.cities.get(i),newWorld.resources.get(k)));
 	   }
 	 }
    }
