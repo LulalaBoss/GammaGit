@@ -32,33 +32,82 @@
  {   
    private int [][] resourceMap;
    private int [][] distMap;
-   public int [][] degMap;
+   private int [][] degMap;
    private ArrayList<City> cityDic;
    private ArrayList<Resource> resourceDic;
    private int cityCur;
-   private int resourceCur;   
-   
-   // Need a two way conversion map...
-   // -----> use a Pair class!!!
+   private int resourceCur;     
    
    public Storage(ArrayList<City> clist, ArrayList<Resource> rlist)
    {
      cityCur = 0;
 	 resourceCur = 0;
 	 
-     resourceMap = new int[clist.size()][rlist.size()];
+     resourceMap = new int[rlist.size()][clist.size()];
 	 distMap = new int [clist.size()][clist.size()];
 	 degMap = new int [clist.size()][clist.size()];
 	 
 	 cityDic = clist;
 	 resourceDic = rlist;
-	 	 
+	 
+     for(int i=0;i<rlist.size();i++)
+	 {
+	   for(int j=0;j<clist.size();j++)
+	   {
+	     resourceMap[i][j] = -1;
+	   }
+	 }	 
 	 // assign each city its own available starting resource
 	 for(int i=0;i<clist.size();i++)
-	 {
-	   resourceMap[getCity(cityDic.get(i))][getResource(cityDic.get(i).resources.get(0))] = 1;
+	 {	   
+	   resourceMap[getResource(cityDic.get(i).resources.get(0))][getCity(cityDic.get(i))] = 0;
 	 }
 	 
+   }
+   
+   public void setResourceMap()
+   {
+	 LinkedList<Integer> list = new LinkedList<Integer>();
+	 
+	 for(int i=0;i<resourceMap.length;i++)
+	 {
+	   System.out.println("This is resource: " + i);
+	   for(int j=0;j<resourceMap[i].length;j++)
+	   {
+	     System.out.println("Now city: " + j);
+	     if(resourceMap[i][j]==0)
+		 {
+		   list.add(j);
+		   System.out.println("list.add: " + i + " , " + j);
+		 }
+	   }
+  
+	   for(int h=0;h<resourceMap[i].length;h++)
+	   {
+	     for(int k=0;k<list.size();k++)
+	     { 
+		   int t = list.get(k);
+	       int dist = degMap[t][h];
+		   if(resourceMap[i][h] < 0)
+		   {
+		     System.out.println("< 0!!: " + i + " , " + h);
+		     resourceMap[i][h] = dist;
+		   }
+		   else if(dist < resourceMap[i][h])
+		   {
+		     resourceMap[i][h] = dist;
+		   }
+	     }
+		 
+	   }
+	   
+	 }
+	 
+   }
+   
+   public int getDegMap(int i, int j)
+   {
+     return degMap[i][j];
    }
    
    // **implement degree traversal algorithm here to obtain all available resources to all city 
@@ -75,7 +124,8 @@
 	 }	 
    }
    
-   public int getDeg(int i, int j)
+   // private helper method
+   private int getDeg(int i, int j)
    {     
      LinkedList<Integer> queue = new LinkedList<Integer>();
 	 // <City, degree>
@@ -124,7 +174,7 @@
    
    public int getCityResource(City city, Resource resource)
    {
-	 return resourceMap[getCity(city)][getResource(resource)];
+	 return resourceMap[getResource(resource)][getCity(city)];
    }
    
    private int getCity(City city)

@@ -84,7 +84,7 @@
 	 {
 	   for(int j=0;j<newWorld.cities.size();j++)
 	   {
-	     System.out.println(newWorld.cities.get(i).name + " : " + newWorld.cities.get(j).name + " - " + newWorld.storage.degMap[i][j]);
+	     System.out.println(newWorld.cities.get(i).name + " : " + newWorld.cities.get(j).name + " - " + newWorld.storage.getDegMap(i,j));
 	   }
 	 } 
    }

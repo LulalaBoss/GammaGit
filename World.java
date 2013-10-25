@@ -56,7 +56,8 @@
 	 storage.setCityDist(cities.get(1), cities.get(3), 1);
 	 storage.setCityDist(cities.get(1), cities.get(4), 1);
 	 
-     storage.setCityDegree();	 
+     storage.setCityDegree();
+     storage.setResourceMap();	 
 	 	 
 	 // initializaing time; progress by month
 	 time = 0;
