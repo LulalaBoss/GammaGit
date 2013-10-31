@@ -12,7 +12,7 @@
    public ProductionRule(String special)
    {
      Name = special;
-	 specialized = new Resource(special);
+	 specialized = new Resource(special, 0);
 	 System.out.println("NO");
    }  
    

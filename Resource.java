@@ -6,9 +6,10 @@
  
  public class Resource extends Commodity
  {
-   public Resource(String s)
+   public Resource(String s, double p)
    {
-     name = s;  
+     name = s; 
+     price = p;	 
    }
    
  }

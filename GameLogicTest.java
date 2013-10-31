@@ -115,7 +115,9 @@
 	   System.out.println("\n"+ newWorld.cities.get(i).name + ": ");
 	   for(int k=0;k<newWorld.resources.size();k++)
 	   {
-	     System.out.println("    "+newWorld.resources.get(k).name + " - " + newWorld.storage.getCityResource(newWorld.cities.get(i),newWorld.resources.get(k)));
+	     System.out.println("    "+newWorld.resources.get(k).name + " - " 
+		   + newWorld.storage.getCityResource(newWorld.cities.get(i),newWorld.resources.get(k)) 
+		   + " : " + newWorld.market.getMarketPrice(newWorld.cities.get(i),newWorld.resources.get(k)));
 	   }
 	 }
    }

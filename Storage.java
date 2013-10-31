@@ -30,19 +30,14 @@
  
  public class Storage
  {   
-   private int [][] resourceMap;
-   private int [][] distMap;
-   private int [][] degMap;
-   private ArrayList<City> cityDic;
-   private ArrayList<Resource> resourceDic;
-   private int cityCur;
-   private int resourceCur;     
-   
+   protected int [][] resourceMap;
+   protected int [][] distMap;
+   protected int [][] degMap;
+   protected ArrayList<City> cityDic;
+   protected ArrayList<Resource> resourceDic;
+      
    public Storage(ArrayList<City> clist, ArrayList<Resource> rlist)
-   {
-     cityCur = 0;
-	 resourceCur = 0;
-	 
+   {	 
      resourceMap = new int[rlist.size()][clist.size()];
 	 distMap = new int [clist.size()][clist.size()];
 	 degMap = new int [clist.size()][clist.size()];

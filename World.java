@@ -10,6 +10,7 @@
    public ArrayList<City> cities;
    public ArrayList<Resource> resources;
    public Storage storage;
+   public Market market;
    
    public int time;   
  
@@ -20,29 +21,34 @@
 	 resources = new ArrayList<Resource>();
 	 
 	 // temporary city creation; to be removed later
-	 Resource resource = new Resource("Wood");
+	 Resource resource = new Resource("Wood", 18.0);
 	 resources.add(resource);	 
 	 City temp = new City(resource, "Redwood City"); 
 	 cities.add(temp);
 	 	 
-	 resource = new Resource("Fish");
+	 resource = new Resource("Fish", 1.0);
 	 resources.add(resource);
 	 temp = new City(resource, "Santa Cruz");
 	 cities.add(temp);
 	 
-	 resource = new Resource("Copper");
+	 resource = new Resource("Copper", 50.0);
 	 resources.add(resource);
 	 temp = new City(resource, "Coppermine");
 	 cities.add(temp);
 	 
-	 resource = new Resource("Wool");
+	 resource = new Resource("Wool", 5.0);
 	 resources.add(resource);
 	 temp = new City(resource, "La Jolla");
 	 cities.add(temp);
 	 
-	 resource = new Resource("Crab");
+	 resource = new Resource("Crab", 25.0);
 	 resources.add(resource);
 	 temp = new City(resource, "New Port");
+	 cities.add(temp);
+	 	 
+	 resource = new Resource("Gold", 100.0);
+	 resources.add(resource);
+	 temp = new City(resource, "San Jose");
 	 cities.add(temp);
 
 	 
@@ -56,8 +62,14 @@
 	 storage.setCityDist(cities.get(1), cities.get(3), 1);
 	 storage.setCityDist(cities.get(1), cities.get(4), 1);
 	 
+	 storage.setCityDist(cities.get(4), cities.get(5), 1);
+	 storage.setCityDist(cities.get(3), cities.get(5), 1);
+	 
      storage.setCityDegree();
      storage.setResourceMap();	 
+	 
+	 // initialize market board
+	 market = new Market(storage);
 	 	 
 	 // initializaing time; progress by month
 	 time = 0;
