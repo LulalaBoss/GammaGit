@@ -67,40 +67,40 @@
    
    public void setResourceMap()
    {
+     // list of source city
 	 LinkedList<Integer> list = new LinkedList<Integer>();
 	 
 	 for(int i=0;i<resourceMap.length;i++)
 	 {
-	   System.out.println("This is resource: " + i);
+	   // get all source city, add them to list
 	   for(int j=0;j<resourceMap[i].length;j++)
 	   {
-	     System.out.println("Now city: " + j);
 	     if(resourceMap[i][j]==0)
 		 {
 		   list.add(j);
-		   System.out.println("list.add: " + i + " , " + j);
 		 }
 	   }
-  
+       
+	   // loop through all cities again
 	   for(int h=0;h<resourceMap[i].length;h++)
 	   {
 	     for(int k=0;k<list.size();k++)
-	     { 
+	     {
+           // source city		 
 		   int t = list.get(k);
 	       int dist = degMap[t][h];
 		   if(resourceMap[i][h] < 0)
 		   {
-		     System.out.println("< 0!!: " + i + " , " + h);
 		     resourceMap[i][h] = dist;
 		   }
-		   else if(dist < resourceMap[i][h])
+		   else if(dist < resourceMap[i][h] & dist != 0)
 		   {
 		     resourceMap[i][h] = dist;
 		   }
-	     }
-		 
+	     }		 
 	   }
-	   
+	 // clear source list
+     list.clear();
 	 }
 	 
    }
