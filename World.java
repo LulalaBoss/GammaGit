@@ -11,6 +11,7 @@
    public ArrayList<Resource> resources;
    public Storage storage;
    public Market market;
+   public QuestEngine questEngine;
    
    public int time;   
  
@@ -71,8 +72,11 @@
 	 // initialize market board
 	 market = new Market(storage);
 	 	 
-	 // initializaing time; progress by month
+	 // initializing time; progress by month
 	 time = 0;
+	 
+	 // initializing quest engine
+	 questEngine = new QuestEngine(storage);
    }
    
    public void update()

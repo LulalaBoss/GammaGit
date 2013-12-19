@@ -2,6 +2,7 @@
  
  **/
  import java.io.*;
+ import java.util.*;
  
  public class GameLogicTest
  {
@@ -36,7 +37,8 @@
 	   System.out.println("         1 - map");
 	   System.out.println("         2 - end turn");
 	   System.out.println("         3 - display resource/city");
-	   System.out.println("         4 - end");
+	   System.out.println("         4 - quest");
+	   System.out.println("         5 - end");
 	   
 	   BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	   
@@ -68,6 +70,10 @@
 	     display();
 	   }
 	   else if(command.equals("4"))
+	   {
+	     showQuestList();
+	   }
+	   else if(command.equals("5"))
 	   {
 	     end();
 	   }
@@ -125,6 +131,15 @@
    public void checkStash()
    {
      System.out.println("Stash");
+   }
+   
+   public void showQuestList()
+   {
+     ArrayList<String> list = newWorld.questEngine.generate();
+	 for(int i=0;i<list.size();i++)
+	 {
+	   System.out.println(list.get(i));
+	 }
    }
    
    public void end()
