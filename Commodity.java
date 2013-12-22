@@ -8,7 +8,9 @@
  {
    String name;
    double price;
-   int demandPoint;
+   int lowClassIndex;
+   int midClassIndex;
+   int hiClassIndex;
    
    // status of commodity; true = available, vise versa.  
    boolean active;

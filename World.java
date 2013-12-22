@@ -2,7 +2,7 @@
  
  **/
  //package GameLogic;
- 
+ import java.io.*;
  import java.util.*;
  
  public class World
@@ -14,44 +14,51 @@
    public QuestEngine questEngine;
    
    public int time;   
- 
+     
    public World()
    {
      System.out.println("Initializing world...");
 	 cities = new ArrayList<City>();
 	 resources = new ArrayList<Resource>();
 	 
-	 // temporary city creation; to be removed later
-	 Resource resource = new Resource("Wood", 18.0);
-	 resources.add(resource);	 
-	 City temp = new City(resource, "Redwood City"); 
-	 cities.add(temp);
-	 	 
-	 resource = new Resource("Fish", 1.0);
-	 resources.add(resource);
-	 temp = new City(resource, "Santa Cruz");
-	 cities.add(temp);
+	 // read resource_list file
+     try 
+     {
+	   BufferedReader br = new BufferedReader(new FileReader("resource_list.txt"));
+       String line = br.readLine();
+	   while (line != null)
+	   {
+            String[] s = line.split(",");
+			Resource resource = new Resource(s[0], Integer.parseInt(s[1]), Integer.parseInt(s[2]), Integer.parseInt(s[3]), Double.parseDouble(s[4]));
+			resources.add(resource);
+            line = br.readLine();
+        }
+		br.close();
+     }catch(Exception e)
+	 {
+	   System.out.println(e.getMessage());
+	 }
 	 
-	 resource = new Resource("Copper", 50.0);
-	 resources.add(resource);
-	 temp = new City(resource, "Coppermine");
-	 cities.add(temp);
+     try 
+     {
+	   BufferedReader br1 = new BufferedReader(new FileReader("city_list.txt"));
+       String line1 = br1.readLine();
+	   int i = 0;
+	   while (line1 != null)
+	   {	        
+			City temp = new City(resources.get(i), line1);
+			cities.add(temp);
+            line1 = br1.readLine();
+			i++;
+        }
+		br1.close();
+     }catch(Exception e1)
+	 {
+	   System.out.println(e1.getMessage());
+     }
+	 System.out.println(cities.size());
+	 System.out.println(resources.size());
 	 
-	 resource = new Resource("Wool", 5.0);
-	 resources.add(resource);
-	 temp = new City(resource, "La Jolla");
-	 cities.add(temp);
-	 
-	 resource = new Resource("Crab", 25.0);
-	 resources.add(resource);
-	 temp = new City(resource, "New Port");
-	 cities.add(temp);
-	 	 
-	 resource = new Resource("Gold", 100.0);
-	 resources.add(resource);
-	 temp = new City(resource, "San Jose");
-	 cities.add(temp);
-
 	 
 	 storage = new Storage(cities,resources);
      
@@ -65,6 +72,8 @@
 	 
 	 storage.setCityDist(cities.get(4), cities.get(5), 1);
 	 storage.setCityDist(cities.get(3), cities.get(5), 1);
+	 
+	 storage.setCityDist(cities.get(0), cities.get(6), 1);
 	 
      storage.setCityDegree();
      storage.setResourceMap();	 

@@ -6,10 +6,18 @@
  
  public class Resource extends Commodity
  {
-   public Resource(String s, double p)
+   /** Parameters:
+    **   lci: low class index
+	**   mci: middle class index
+	**   hci: high class index
+    **/
+   public Resource(String s, int lci, int mci, int hci, double p)
    {
      name = s; 
-     price = p;	 
+     price = p;
+     lowClassIndex = lci;
+     midClassIndex = mci;
+     hiClassIndex = hci;	 
    }
    
  }
