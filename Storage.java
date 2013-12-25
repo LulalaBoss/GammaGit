@@ -121,36 +121,77 @@
    
    // private helper method
    private int getDeg(int i, int j)
-   {     
-     LinkedList<Integer> queue = new LinkedList<Integer>();
-	 // <City, degree>
-	 Hashtable<Integer, Integer> set = new Hashtable<Integer, Integer>();
+   {  
+     LinkedList<Integer> nodeQueue = new LinkedList<Integer>();
+	 LinkedList<Integer> degQueue = new LinkedList<Integer>();
+	 LinkedList<Integer> traversed = new LinkedList<Integer>();
 	 int deg = 0;
 	 int cur = i;
+	 int result = 0;
+	 // helper flag to avoid repeat
+	 boolean proceed = false;
+	 boolean end = false;
 	 
-	 queue.add(i);
-	 set.put(i,deg);
-	 while(queue.size() > 0)
+	 nodeQueue.add(cur);
+	 degQueue.add(deg);
+	 
+	 while(!end)
 	 {
-	   for(int k=0;k<distMap.length;k++)
+	   if(cur == j)
 	   {
-	     if(distMap[cur][k]!=0)
-	     {
-		   queue.add(k);
-		   set.put(k,set.get(cur)+1);
-		 }
-	   }
-	   if(queue.contains(j))
-	   {
-	     queue.clear();
+	     nodeQueue.clear();
+		 end = true;
 	   }
 	   else
 	   {
-	     cur = queue.poll();
-	   }
+	     // reset flag
+	     proceed = false;
+	     for(int k=0;k<distMap.length;k++)
+	     {
+	       // find all neighbor for all current node
+	       if(distMap[cur][k]!=0)
+	       {
+		     // if one of the neighbor is the target, end loop and return degree
+		     if(k == j)
+		     {
+		       nodeQueue.clear();
+			   result = deg + 1;
+			   k = distMap.length;
+			   end = true;
+		     }
+		     else
+		     {
+		       int temp = deg + 1;
+		       nodeQueue.add(k);
+			   degQueue.add(temp);
+		     }		   
+		   }
+	     }
+	     // add this traversed node into a set to avoid repeat
+	     traversed.add(cur);
+	     // if the next processed node is already traversed, skip it
+	     while(!proceed)
+	     {
+	       if(nodeQueue.size()>0)
+		   {
+	         cur = nodeQueue.poll();
+	         deg = degQueue.poll();
+		   }
+		   
+           if(traversed.contains(cur) == false)
+		   {
+		     proceed = true;
+		   }
+		   else if(nodeQueue.size() == 0)
+		   {
+		     proceed = true;
+			 end = true;
+		   }		 
+	     }
+	   }  
 	 }
 	 
-	 return set.get(j);
+	 return result;
    }
    
    public void setCityDist(City city1, City city2, int dist)
