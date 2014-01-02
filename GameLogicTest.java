@@ -102,15 +102,18 @@
    }
       
    public void checkStatus()
-   {
+   {    
      System.out.println("========== Status ==========");
 	 System.out.println("-Time Elapsed: " + newWorld.time);
-	 System.out.println("- City:" + newWorld.cities.get(0).name);
-	 System.out.println("- * population: " + newWorld.cities.get(0).population);
-	 System.out.println("- * satisfaction: " + newWorld.cities.get(0).satisfaction);
-	 System.out.println("");
 	 System.out.println("- User:");
 	 System.out.println("- * money: " + newUser.money);
+	 System.out.println("");
+	 for(int i=0;i<newWorld.cities.size();i++){
+	   System.out.println("- City:" + newWorld.cities.get(i).name);
+	   System.out.println("- * population: " + newWorld.cities.get(i).population);
+	   System.out.println("- * satisfaction: " + newWorld.cities.get(i).satisfaction);
+	   System.out.println("");
+     }
    }
    
    public void display()
