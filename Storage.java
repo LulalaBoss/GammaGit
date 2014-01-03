@@ -4,13 +4,14 @@
  //package GameLogic;
  
  import java.util.*;
+ import java.lang.*;
  
- class Pair<K,V>
+ class Pair<K>
  {
    private K key;
-   private V value;
+   private int value;
 
-   public Pair(K key, V value)
+   public Pair(K key, int value)
    {
      this.key = key;
 	 this.value = value;
@@ -21,9 +22,14 @@
      return key;
    }
    
-   public V getValue()
+   public int getValue()
    {
      return value;
+   }
+   
+   public void updateValue(int i)
+   {
+     value = i;
    }
    
  }
