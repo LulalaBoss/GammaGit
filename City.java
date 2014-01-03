@@ -64,8 +64,12 @@
 		   goods.get(j).updateValue(value + 10);
 		 }
 	   }
-	 }
-     
+	 }    
+   }
+   
+   public void popConsumption()
+   {
+    
    }
    
    public void editRule()
