@@ -115,7 +115,7 @@
 	   System.out.println("- Available Goods:");
 	   for(int j=0;j<newWorld.cities.get(i).goods.size();j++)
 	   {
-	     System.out.println("-  * " + ((Resource)newWorld.cities.get(i).goods.get(j).getKey()).name + " : " + newWorld.cities.get(i).goods.get(j).getValue());
+	     //System.out.println("-  * " + ((Resource)newWorld.cities.get(i).goods.get(j).getKey()).name + " : " + newWorld.cities.get(i).goods.get(j).getValue());
 	   }
 	   System.out.println("");
      }

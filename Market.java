@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Market
 {
+  private int [][] quantityBoard;
   private double [][] marketBoard;
   private int [][] resourceMap;
   private int [][] distMap;
@@ -20,6 +21,7 @@ public class Market
 	this.cityDic = s.cityDic;
 	this.resourceDic = s.resourceDic;
 	marketBoard = new double[resourceDic.size()][cityDic.size()];
+	quantityBoard = new int[resourceDic.size()][cityDic.size()];
     
     // set default resource price
     for(int i=0;i<resourceMap.length;i++)
@@ -38,6 +40,11 @@ public class Market
 		}
 	  }
 	}	
+  }
+  
+  public int getGoodQuantity(City city, Resource resource)
+  {
+    return quantityBoard[getResource(resource)][getCity(city)];
   }
   
   public double getMarketPrice(City city, Resource resource)

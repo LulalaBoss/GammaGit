@@ -12,6 +12,7 @@
    public Storage storage;
    public Market market;
    public QuestEngine questEngine;
+   public MarketBoard board;
    
    public int time;   
      
@@ -61,6 +62,7 @@
 	 
 	 
 	 storage = new Storage(cities,resources);
+	 
      
 	 // set distances between cities
      storage.setCityDist(cities.get(1), cities.get(0), 1);
