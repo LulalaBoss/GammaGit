@@ -7,7 +7,8 @@
  public class User
  {
    public int money;
-   public ArrayList<Pair> transaction;
+   public int location;
+   public ArrayList<Resource> cargo;
  
    public User()
    {
@@ -15,7 +16,10 @@
 	 // set initial money to 1000
 	 money = 1000;
 	 
-	 transaction = new ArrayList<Pair>();
+	 cargo = new ArrayList<Resource>();
+	 
+	 // set default player location
+	 location = 0;
    }
    
    public void update()

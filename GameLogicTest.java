@@ -38,7 +38,8 @@
 	   System.out.println("         2 - end turn");
 	   System.out.println("         3 - display resource/city");
 	   System.out.println("         4 - quest");
-	   System.out.println("         5 - end");
+	   System.out.println("         5 - action");
+	   System.out.println("         6 - end");
 	   
 	   BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	   
@@ -75,6 +76,10 @@
 	   }
 	   else if(command.equals("5"))
 	   {
+	     action(); 
+	   }
+	   else if(command.equals("6"))
+	   {
 	     end();
 	   }
 	   
@@ -107,6 +112,7 @@
 	 System.out.println("-Time Elapsed: " + newWorld.time);
 	 System.out.println("- User:");
 	 System.out.println("- * money: " + newUser.money);
+	 System.out.println("- * current locale: " + newWorld.cities.get(newUser.location).name);
 	 System.out.println("");
 	 for(int i=0;i<newWorld.cities.size();i++){
 	   System.out.println("- City:" + newWorld.cities.get(i).name);
@@ -147,6 +153,109 @@
 	 for(int i=0;i<list.size();i++)
 	 {
 	   System.out.println(list.get(i));
+	 }
+   }
+   
+   public void action()
+   {
+     System.out.println("What would you like to do? ");
+	 System.out.println("--- 1. travel");
+	 System.out.println("--- 2. purchase goods");
+	 System.out.println("--- 3. inspect cargo");
+	 System.out.println("--- 4. nothing");
+	 
+	 BufferedReader br1 = new BufferedReader(new InputStreamReader(System.in));
+	 String command1 = null;
+	   
+	 try 
+	 {
+       command1 = br1.readLine();
+     }
+	 catch(IOException ioe)
+	 {
+       System.out.println("IO error");
+       System.exit(1);
+     }
+	   
+	 if(command1.equals("1"))
+	 {
+	   travel();
+	 }
+	 else if(command1.equals("2"))
+	 {
+       purchase();
+	 }
+	 else if(command1.equals("3"))
+	 {
+	   inspectCargo();
+	 }
+	 else if(command1.equals("4")){}
+
+   }
+   
+   public void travel()
+   {
+     String input = null;
+     System.out.println("Where would you like to go? ");
+	 for(int i=0;i<newWorld.cities.size();i++)
+	 {
+	   System.out.println( i + " - " + newWorld.cities.get(i).name);
+	 }
+	 
+	 BufferedReader br2 = new BufferedReader(new InputStreamReader(System.in));   
+	 try 
+	 {
+       input = br2.readLine();
+     }
+	 catch(IOException ioe)
+	 {
+       System.out.println("IO error");
+       System.exit(1);
+     }
+	 
+	 // travel and update turn count
+	 newUser.location = Integer.parseInt(input);
+	 newWorld.time = newWorld.time + 1; /*** TODO: update time should equal the distance between two cities */
+   }
+   
+   public void purchase()
+   {
+     String input = null;
+	 int resourceId = 0;
+	 int quantity = 0;
+     System.out.println("What would you like to purchase? ");
+	 for(int i=0;i<newWorld.cities.get(newUser.location).goods.size();i++)
+	 {
+	   Resource r = newWorld.cities.get(newUser.location).goods.get(i);
+	   System.out.println( " - "+ r.name + " - id: " + r.id);
+	 }
+	 
+	 BufferedReader br2 = new BufferedReader(new InputStreamReader(System.in));   
+	 try 
+	 {
+       input = br2.readLine();
+	   resourceId = Integer.parseInt(input);
+	   System.out.println("How many?");
+	   input = br2.readLine();
+	   quantity = Integer.parseInt(input);
+     }
+	 catch(IOException ioe)
+	 {
+       System.out.println("IO error");
+       System.exit(1);
+     }
+	 
+	 for(int i=0;i<quantity;i++)
+	 {
+	   newUser.cargo.add(newWorld.resources.get(resourceId));
+	 }
+   }
+   
+   public void inspectCargo()
+   {
+     for(int i=0;i<newUser.cargo.size();i++)
+	 {
+       System.out.println( (i+1) + ". " + newUser.cargo.get(i).name);
 	 }
    }
    

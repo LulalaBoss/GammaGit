@@ -13,6 +13,7 @@
     **/
    
    public String name;
+   public String id;
    public double price;
    public int lowClassIndex;
    public int midClassIndex;
@@ -24,9 +25,10 @@
    // status of commodity; true = available, vise versa.  
    public boolean active;
    
-   public Resource(String s, int lci, int mci, int hci, double p, boolean ie)
+   public Resource(String s, String id, int lci, int mci, int hci, double p, boolean ie)
    {
-     name = s; 
+     name = s;
+     this.id = id;	 
      price = p;
      lowClassIndex = lci;
      midClassIndex = mci;

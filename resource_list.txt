@@ -1,7 +1,7 @@
-Wood,0,0,0,20,false
-Fish,10,8,5,10,true
-Copper,0,0,0,100,false
-Wool,0,0,0,5,false
-Crab,0,7,15,100,false
-Gold,0,0,0,1000,false
-Fruit,2,15,10,25,true
+Wood,0,0,0,0,20,false
+Fish,1,10,8,5,10,true
+Copper,2,0,0,0,100,false
+Wool,3,0,0,0,5,false
+Crab,4,0,7,15,100,false
+Gold,5,0,0,0,1000,false
+Fruit,6,2,15,10,25,true

@@ -39,7 +39,7 @@
      System.out.println("Updating City...");
 	 
 	 // natural population rule
-	 double tempPop = population * ( 0.00001 * satisfaction) + population;
+	 double tempPop = population * ( 0.000001 * satisfaction) + population;
 	 population = (int) tempPop;	 
 	 
 	 // satisfactory score: based on the variety of goods available in this city

@@ -30,7 +30,7 @@
 	   while (line != null)
 	   {
             String[] s = line.split(",");
-			Resource resource = new Resource(s[0], Integer.parseInt(s[1]), Integer.parseInt(s[2]), Integer.parseInt(s[3]), Double.parseDouble(s[4]), Boolean.valueOf(s[5]));
+			Resource resource = new Resource(s[0], s[1], Integer.parseInt(s[2]), Integer.parseInt(s[3]), Integer.parseInt(s[4]), Double.parseDouble(s[5]), Boolean.valueOf(s[6]));
 			resources.add(resource);
             line = br.readLine();
         }
