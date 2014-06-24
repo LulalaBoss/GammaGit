@@ -6,7 +6,7 @@
  
  public class User
  {
-   public int money;
+   public double money;
    public int location;
    public ArrayList<Resource> cargo;
  
@@ -25,6 +25,6 @@
    public void update()
    {
      System.out.println("Updating user...");
-   }
+   }     
  
  }

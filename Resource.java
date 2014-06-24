@@ -13,7 +13,7 @@
     **/
    
    public String name;
-   public String id;
+   public int id;
    public double price;
    public int lowClassIndex;
    public int midClassIndex;
@@ -28,7 +28,7 @@
    public Resource(String s, String id, int lci, int mci, int hci, double p, boolean ie)
    {
      name = s;
-     this.id = id;	 
+     this.id = Integer.parseInt(id);	 
      price = p;
      lowClassIndex = lci;
      midClassIndex = mci;

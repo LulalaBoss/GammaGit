@@ -13,6 +13,7 @@
    public Market market;
    public QuestEngine questEngine;
    public MarketBoard board;
+   public User user;
    
    public int time;   
      
@@ -21,6 +22,7 @@
      System.out.println("Initializing world...");
 	 cities = new ArrayList<City>();
 	 resources = new ArrayList<Resource>();
+	 user = new User();
 	 
 	 // read resource_list file
      try 
@@ -100,9 +102,37 @@
 	   cities.get(i).update();
 	 }
 	 
+	 // updating user
+	 user.update();
+	 
 	 // update total time elapsed
 	 time++;
 	 
+   }
+   
+   public boolean purchase(int resourceId, int quantity)
+   {
+     boolean purchaseSuccessful = false;
+     double moneyDue = quantity * market.getMarketPrice(cities.get(user.location), resources.get(resourceId));
+	 
+	 if(moneyDue < user.money)
+	 {
+	   user.money = user.money - moneyDue;
+	   for(int i=0;i<quantity;i++)
+	   {
+	     user.cargo.add(resources.get(resourceId));
+	   }
+	   
+	   purchaseSuccessful = true;
+	 }
+	 
+	 return purchaseSuccessful;
+   }
+   
+   public void sell(int cargoId)
+   {
+     user.money = user.money + market.getMarketPrice(cities.get(user.location), resources.get(user.cargo.get(cargoId).id));
+	 user.cargo.remove(cargoId);	 
    }
 
    

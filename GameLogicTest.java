@@ -9,14 +9,12 @@
  
    private boolean testOn;
    private World newWorld; 
-   private User newUser;
    
    public GameLogicTest()
    {
      System.out.println("Initializing...");
 	 testOn = true;
 	 newWorld = new World();
-	 newUser = new User();
    }
    
    public static void main(String [ ] args)
@@ -102,7 +100,6 @@
    
    public void endTurn()
    {
-     newUser.update();
 	 newWorld.update();
    }
       
@@ -111,8 +108,8 @@
      System.out.println("========== Status ==========");
 	 System.out.println("-Time Elapsed: " + newWorld.time);
 	 System.out.println("- User:");
-	 System.out.println("- * money: " + newUser.money);
-	 System.out.println("- * current locale: " + newWorld.cities.get(newUser.location).name);
+	 System.out.println("- * money: " + newWorld.user.money);
+	 System.out.println("- * current locale: " + newWorld.cities.get(newWorld.user.location).name);
 	 System.out.println("");
 	 for(int i=0;i<newWorld.cities.size();i++){
 	   System.out.println("- City:" + newWorld.cities.get(i).name);
@@ -161,8 +158,9 @@
      System.out.println("What would you like to do? ");
 	 System.out.println("--- 1. travel");
 	 System.out.println("--- 2. purchase goods");
-	 System.out.println("--- 3. inspect cargo");
-	 System.out.println("--- 4. nothing");
+	 System.out.println("--- 3. sell goods");
+	 System.out.println("--- 4. inspect cargo");
+	 System.out.println("--- 5. nothing");
 	 
 	 BufferedReader br1 = new BufferedReader(new InputStreamReader(System.in));
 	 String command1 = null;
@@ -187,10 +185,39 @@
 	 }
 	 else if(command1.equals("3"))
 	 {
+	   sell();
+	 }
+	 else if(command1.equals("4"))
+	 {
 	   inspectCargo();
 	 }
-	 else if(command1.equals("4")){}
+	 else if(command1.equals("5")){}
 
+   }
+   
+   public void sell()
+   {
+     String input = null;
+     System.out.println("What would you like to sell? ");
+	 for(int i=0;i<newWorld.user.cargo.size();i++)
+	 {
+	   Resource r = newWorld.user.cargo.get(i);
+	   double price = newWorld.market.getMarketPrice(newWorld.cities.get(newWorld.user.location),newWorld.resources.get(r.id));
+	   System.out.println( i + ". " + r.name + ": price here is $" + price);
+	 }
+	 
+	 BufferedReader br2 = new BufferedReader(new InputStreamReader(System.in));   
+	 try 
+	 {
+       input = br2.readLine();
+     }
+	 catch(IOException ioe)
+	 {
+       System.out.println("IO error");
+       System.exit(1);
+     }
+	 
+	 newWorld.sell(Integer.parseInt(input));
    }
    
    public void travel()
@@ -214,7 +241,7 @@
      }
 	 
 	 // travel and update turn count
-	 newUser.location = Integer.parseInt(input);
+	 newWorld.user.location = Integer.parseInt(input);
 	 newWorld.time = newWorld.time + 1; /*** TODO: update time should equal the distance between two cities */
    }
    
@@ -224,10 +251,11 @@
 	 int resourceId = 0;
 	 int quantity = 0;
      System.out.println("What would you like to purchase? ");
-	 for(int i=0;i<newWorld.cities.get(newUser.location).goods.size();i++)
+	 for(int i=0;i<newWorld.cities.get(newWorld.user.location).goods.size();i++)
 	 {
-	   Resource r = newWorld.cities.get(newUser.location).goods.get(i);
-	   System.out.println( " - "+ r.name + " - id: " + r.id);
+	   Resource r = newWorld.cities.get(newWorld.user.location).goods.get(i);
+	   double price = newWorld.market.getMarketPrice(newWorld.cities.get(newWorld.user.location),r);
+	   System.out.println( " - "+ r.name + " - id: " + r.id + " $" + price);
 	 }
 	 
 	 BufferedReader br2 = new BufferedReader(new InputStreamReader(System.in));   
@@ -245,17 +273,22 @@
        System.exit(1);
      }
 	 
-	 for(int i=0;i<quantity;i++)
+	 if(newWorld.purchase(resourceId, quantity))
 	 {
-	   newUser.cargo.add(newWorld.resources.get(resourceId));
+	   System.out.println("Purchase successful!");
 	 }
+	 else
+	 {
+	   System.out.println("Sorry you do not have enough money for that!");
+	 }
+	 
    }
    
    public void inspectCargo()
    {
-     for(int i=0;i<newUser.cargo.size();i++)
+     for(int i=0;i<newWorld.user.cargo.size();i++)
 	 {
-       System.out.println( (i+1) + ". " + newUser.cargo.get(i).name);
+       System.out.println( (i+1) + ". " + newWorld.user.cargo.get(i).name);
 	 }
    }
    
