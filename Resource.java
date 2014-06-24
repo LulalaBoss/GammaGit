@@ -2,9 +2,9 @@
  
  **/
  //package GameLogic;
-
+import java.io.*;
  
- public class Resource
+ public class Resource implements Serializable
  {
    /** Parameters:
     **   lci: low class index

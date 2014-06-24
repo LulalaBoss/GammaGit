@@ -1,6 +1,7 @@
+ import java.io.*;
  import java.util.*;
 
- public class QuestEngine
+ public class QuestEngine implements Serializable
  {
    private Storage storage;
  

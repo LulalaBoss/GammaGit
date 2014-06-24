@@ -2,9 +2,10 @@
  
  **/
  //package GameLogic;
+ import java.io.*;
  import java.util.*;
  
- public class City
+ public class City implements Serializable
  {
    public int population;
    public ArrayList<Resource> resources;

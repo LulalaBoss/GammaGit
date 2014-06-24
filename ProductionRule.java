@@ -5,7 +5,7 @@
  
  import java.util.*;
  
- public class ProductionRule extends Rule
+ public class ProductionRule implements Serializable extends Rule
  {
    private Resource specialized;
  

@@ -3,7 +3,7 @@
  **/
  //package GameLogic;
  
- public class RulesMap
+ public class RulesMap implements Serializable
  {
  
  }

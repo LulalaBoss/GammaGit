@@ -5,7 +5,7 @@
  //package GameLogic;
  
  
- public abstract class Rule
+ public abstract class Rule implements Serializable
  {
    public String Name;
    

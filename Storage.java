@@ -2,11 +2,11 @@
  
  **/
  //package GameLogic;
- 
+ import java.io.*;
  import java.util.*;
  import java.lang.*;
  
- class Pair<K>
+ class Pair<K> implements Serializable
  {
    private K key;
    private int value;
@@ -34,7 +34,7 @@
    
  }
  
- public class Storage
+ public class Storage implements Serializable
  {   
    protected int [][] resourceMap;
    protected int [][] distMap;

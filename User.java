@@ -2,9 +2,10 @@
  
  **/
  //package GameLogic;
+ import java.io.*;
  import java.util.*;
  
- public class User
+ public class User implements Serializable
  {
    public double money;
    public int location;

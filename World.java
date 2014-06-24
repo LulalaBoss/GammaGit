@@ -5,7 +5,7 @@
  import java.io.*;
  import java.util.*;
  
- public class World
+ public class World implements Serializable
  {
    public ArrayList<City> cities;
    public ArrayList<Resource> resources;

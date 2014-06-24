@@ -25,64 +25,75 @@
    
    public void run()
    {
-	 
-	 String command = null;
-	 
-     // While loop - issue command to proceed  
-	 while(testOn)
-	 {
-	   System.out.println("\nCommand: 0 - check status");
-	   System.out.println("         1 - map");
-	   System.out.println("         2 - end turn");
-	   System.out.println("         3 - display resource/city");
-	   System.out.println("         4 - quest");
-	   System.out.println("         5 - action");
-	   System.out.println("         6 - end");
-	   
+	 try{
+	   String command = null;
 	   BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 	   
-	   try 
-	   {
-         command = br.readLine();
-       }
-	   catch(IOException ioe)
-	   {
-         System.out.println("IO error");
-         System.exit(1);
-       }
+	   System.out.println("Would you like to load last saved game? y/n");	
 	   
-	   if(command.equals("0"))
+	   command = br.readLine();
+	   
+	   // if yes, load all objects from files
+	   if(command.equals("y"))
 	   {
-	     checkStatus();
-	   }
-	   else if(command.equals("1"))
-	   {
-	     //checkStash();
-		 map();
-	   }
-	   else if(command.equals("2"))
-	   {
-	     endTurn();
-	   }
-	   else if(command.equals("3"))
-	   {
-	     display();
-	   }
-	   else if(command.equals("4"))
-	   {
-	     showQuestList();
-	   }
-	   else if(command.equals("5"))
-	   {
-	     action(); 
-	   }
-	   else if(command.equals("6"))
-	   {
-	     end();
+	     newWorld = load();
 	   }
 	   
+       // While loop - issue command to proceed  
+	   while(testOn)
+	   {
+	     System.out.println("\nCommand: 0 - check status");
+	     System.out.println("         1 - map");
+	     System.out.println("         2 - end turn");
+	     System.out.println("         3 - display resource/city");
+	     System.out.println("         4 - quest");
+	     System.out.println("         5 - action");
+	     System.out.println("         6 - save progress");
+	     System.out.println("         7 - end");
+	   	    	   
+         command = br.readLine();	   
+	   
+	     if(command.equals("0"))
+	     {
+	       checkStatus();
+	     }
+	     else if(command.equals("1"))
+	     {
+	       //checkStash();
+		   map();
+	     }
+	     else if(command.equals("2"))
+	     {
+	       endTurn();
+	     }
+	     else if(command.equals("3"))
+	     {
+	       display();
+	     }
+	     else if(command.equals("4"))
+	     {
+	       showQuestList();
+	     }
+	     else if(command.equals("5"))
+	     {
+	       action(); 
+	     }
+	     else if(command.equals("6"))
+	     {
+	       save();
+	     }
+	     else if(command.equals("7"))
+	     {
+	       end();
+	     }
+	   
+	   }
 	 }
-	 
+	 catch(IOException ioe)
+	 {
+       System.out.println("IO error");
+       System.exit(1);
+     }
 	 
    }
    
@@ -96,6 +107,39 @@
 	     System.out.println(newWorld.cities.get(i).name + " : " + newWorld.cities.get(j).name + " - " + newWorld.storage.getDegMap(i,j));
 	   }
 	 } 
+   }
+   
+   public void save()
+   {
+     String worldFile = "C:\\Users\\ahsu\\Desktop\\Local\\Logic\\world.obj";
+	 try
+	 {
+	   FileOutputStream fileOut = new FileOutputStream(worldFile);
+	   ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+	   objectOut.writeObject(newWorld);
+	   objectOut.close();
+	 }
+	 catch(Exception e){ e.printStackTrace();}
+	 
+	 System.out.println("Game saved successfully.");
+   }
+   
+   public World load()
+   {
+     World world = new World();
+     try
+	 {
+	   String worldFile = "C:\\Users\\ahsu\\Desktop\\Local\\Logic\\world.obj";
+	   FileInputStream fileIn = new FileInputStream(worldFile);
+	   ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+	   world = (World) objectIn.readObject();
+	   objectIn.close();
+	 }
+	 catch(Exception e){ e.printStackTrace();}
+	 
+	 System.out.println("Game loaded successfully.");
+	 
+	 return world;
    }
    
    public void endTurn()

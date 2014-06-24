@@ -1,6 +1,7 @@
+import java.io.*;
 import java.util.*;
 
-public class Market
+public class Market implements Serializable
 {
   private int [][] quantityBoard;
   private double [][] marketBoard;

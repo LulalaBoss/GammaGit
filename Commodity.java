@@ -4,7 +4,7 @@
  //package GameLogic;
  
  
- public abstract class Commodity
+ public abstract class Commodity implements Serializable
  {
    String name;
    double price;
