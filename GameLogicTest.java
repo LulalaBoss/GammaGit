@@ -286,7 +286,7 @@
 	 
 	 // travel and update turn count
 	 newWorld.user.location = Integer.parseInt(input);
-	 newWorld.time = newWorld.time + 1; /*** TODO: update time should equal the distance between two cities */
+	 endTurn(); /*** TODO: update time should equal the distance between two cities */
    }
    
    public void purchase()
