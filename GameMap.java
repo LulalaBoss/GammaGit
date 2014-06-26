@@ -2,13 +2,19 @@
  
  **/
  //package GameLogic;
-import java.util.*;
+ import java.io.*;
+ import java.util.*;
  
- public class GameMap implements Map, Serializable
+ public class GameMap implements Serializable
  {
-   private String name;
-   private int value;
+   public HashMap<String,Tile> tiles;
    
-   public GameMap<>(){}
+   public GameMap(ArrayList<Tile> tiles)
+   {
+     for(int i=0;i<tiles.size();i++)
+	 {
+       this.tiles.put(tiles.get(i).name, tiles.get(i));
+	 }
+   }
    
  }

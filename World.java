@@ -32,7 +32,7 @@
 	   while (line != null)
 	   {
             String[] s = line.split(",");
-			Resource resource = new Resource(s[0], s[1], Integer.parseInt(s[2]), Integer.parseInt(s[3]), Integer.parseInt(s[4]), Double.parseDouble(s[5]), Boolean.valueOf(s[6]));
+			Resource resource = new Resource(s[0], s[1], Double.parseDouble(s[5]), Boolean.valueOf(s[6]));
 			resources.add(resource);
             line = br.readLine();
         }
