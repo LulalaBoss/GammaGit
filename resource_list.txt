@@ -5,3 +5,4 @@ Wool,3,0,0,0,5,false
 Crab,4,0,7,15,100,false
 Gold,5,0,0,0,1000,false
 Fruit,6,2,15,10,25,true
+Wheat,0,0,0,0,10,true

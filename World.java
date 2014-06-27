@@ -73,7 +73,12 @@
 	   while (line2 != null)
 	   {	        
 	        String[] s = line2.split(",");
-			Tile temp = new Tile(s[0], Double.parseDouble(s[1]), Double.parseDouble(s[2]), Double.parseDouble(s[3]), Double.parseDouble(s[4]), Double.parseDouble(s[5]), Double.parseDouble(s[6]), Double.parseDouble(s[7]));
+			double[] l = new double[s.length-1];
+			for(int i=0;i<s.length-1;i++)
+			{
+			  l[i] = Double.parseDouble(s[i+1]);
+			}
+			Tile temp = new Tile(s[0], l);
 			tiles.add(temp);
             line2 = br2.readLine();
         }
@@ -117,7 +122,7 @@
      storage.setResourceMap();	 
 	 
 	 // initialize market board
-	 market = new Market(storage);
+	 market = new Market(storage, gameMap);
 	 	 
 	 // initializing time; progress by month
 	 time = 0;
