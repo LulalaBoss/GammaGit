@@ -8,18 +8,19 @@
  public class Tile implements Serializable
  {
    public String name;
+   public City city;
    
    // resources index for this Tile
-   public int woodIndex;
-   public int fishIndex;
-   public int copperIndex;
-   public int woolIndex;
-   public int crabIndex;
-   public int goldIndex;
-   public int fruitIndex;
+   public double woodIndex;
+   public double fishIndex;
+   public double copperIndex;
+   public double  woolIndex;
+   public double  crabIndex;
+   public double  goldIndex;
+   public double  fruitIndex;
    
    
-   public Tile(String name, int wood, int fish, int copper, int wool, int crab, int gold, int fruit)
+   public Tile(String name, double wood, double fish, double copper, double wool, double crab, double gold, double fruit)
    {
      this.name = name;
 	 woodIndex = wood;

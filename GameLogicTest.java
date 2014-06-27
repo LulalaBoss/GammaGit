@@ -111,7 +111,7 @@
    
    public void save()
    {
-     String worldFile = "C:\\Users\\ahsu\\Desktop\\Local\\Logic\\world.obj";
+     String worldFile = "C:\\Users\\alvin\\Desktop\\Local\\GameLogic\\world.obj";
 	 try
 	 {
 	   FileOutputStream fileOut = new FileOutputStream(worldFile);
@@ -129,7 +129,7 @@
      World world = new World();
      try
 	 {
-	   String worldFile = "C:\\Users\\ahsu\\Desktop\\Local\\Logic\\world.obj";
+	   String worldFile = "C:\\Users\\alvin\\Desktop\\Local\\GameLogic\\world.obj";
 	   FileInputStream fileIn = new FileInputStream(worldFile);
 	   ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 	   world = (World) objectIn.readObject();

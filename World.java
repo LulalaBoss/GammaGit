@@ -9,11 +9,13 @@
  {
    public ArrayList<City> cities;
    public ArrayList<Resource> resources;
+   public ArrayList<Tile> tiles;
    public Storage storage;
    public Market market;
    public QuestEngine questEngine;
    public MarketBoard board;
    public User user;
+   public GameMap gameMap;
    
    public int time;   
      
@@ -22,7 +24,8 @@
      System.out.println("Initializing world...");
 	 cities = new ArrayList<City>();
 	 resources = new ArrayList<Resource>();
-	 user = new User();
+	 tiles = new ArrayList<Tile>();
+	 user = new User();	 
 	 
 	 // read resource_list file
      try 
@@ -42,6 +45,7 @@
 	   System.out.println(e.getMessage());
 	 }
 	 
+	 // read city_list file
      try 
      {
 	   BufferedReader br1 = new BufferedReader(new FileReader("city_list.txt"));
@@ -59,12 +63,34 @@
 	 {
 	   System.out.println(e1.getMessage());
      }
-	 System.out.println(cities.size());
-	 System.out.println(resources.size());
 	 
+	 // read tile_list file
+	 try 
+     {
+	   BufferedReader br2 = new BufferedReader(new FileReader("tile_list.txt"));
+       String line2 = br2.readLine();
+	   while (line2 != null)
+	   {	        
+	        String[] s = line2.split(",");
+			Tile temp = new Tile(s[0], Double.parseDouble(s[1]), Double.parseDouble(s[2]), Double.parseDouble(s[3]), Double.parseDouble(s[4]), Double.parseDouble(s[5]), Double.parseDouble(s[6]), Double.parseDouble(s[7]));
+			tiles.add(temp);
+            line2 = br2.readLine();
+        }
+		br2.close();
+		
+     }catch(Exception e2)
+	 {
+	   System.out.println("ERROR!! " + e2.getMessage());
+     }
+	 	 
+	 System.out.println("city size: " + cities.size());
+	 System.out.println("resource size: " + resources.size());
+	 System.out.println("tile size: " + tiles.size());
 	 
 	 storage = new Storage(cities,resources);
+	 gameMap = new GameMap(tiles);
 	 
+	 gameMap.setMap();
      
 	 // set distances between cities
      storage.setCityDist(cities.get(1), cities.get(0), 1);
