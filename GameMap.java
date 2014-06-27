@@ -68,5 +68,16 @@
       catch(Exception e){}
 	  
 	}
+	
+	public void update()
+	{
+	  for(int i=0;i<tileMap.size();i++)
+	  {
+	    for(int j=0;j<tileMap.get(i).size();j++)
+		{
+		  tileMap.get(i).get(j).update();
+		}
+	  }
+	}
    
  }

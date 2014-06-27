@@ -50,7 +50,18 @@ public class Market implements Serializable
   
   public void update()
   {
-    
+  
+    for(int i=0;i<resourceDic.size();i++)
+	{
+	  for(int j=0;j<cityDic.size();j++)
+	  {
+	      double p = marketBoard[i][j];
+		  Tile t = gameMap.tileMap.get(cityDic.get(j).x).get(cityDic.get(j).y);
+		  // updating price
+		  marketBoard[i][j] = (p * (1 - (t.resourceIndex[i]) + t.resourceDemand[i]));         		  
+	  }
+	}	
+	
   }
   
   private int getCity(City city)

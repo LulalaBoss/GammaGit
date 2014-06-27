@@ -144,6 +144,12 @@
 	 // updating user
 	 user.update();
 	 
+	 // update GameMap first
+	 gameMap.update();
+	 
+	 // updating market
+	 market.update();
+	 
 	 // update total time elapsed
 	 time++;
 	 
