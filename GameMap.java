@@ -47,10 +47,10 @@
 			    tempList.add(tilesDict.get("FOREST"));
 				break;
 			  case "3":
-			    tempList.add(tilesDict.get("SEA"));
+			    tempList.add(tilesDict.get("PLAIN"));
 				break;
 			  case "4":
-			    tempList.add(tilesDict.get("PLAIN"));
+			    tempList.add(tilesDict.get("SEA"));
 				break;
 			  case "5":
 			    tempList.add(tilesDict.get("HILL"));

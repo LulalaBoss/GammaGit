@@ -49,11 +49,12 @@
      try 
      {
 	   BufferedReader br1 = new BufferedReader(new FileReader("city_list.txt"));
-       String line1 = br1.readLine();
+       String line1 = br1.readLine();	   
 	   int i = 0;
 	   while (line1 != null)
-	   {	        
-			City temp = new City(resources.get(i), line1);
+	   {
+            String[] array = line1.split(",");	   
+			City temp = new City(resources.get(i), array[0],Integer.parseInt(array[1]),Integer.parseInt(array[2]));
 			cities.add(temp);
             line1 = br1.readLine();
 			i++;
@@ -90,7 +91,14 @@
 	 storage = new Storage(cities,resources);
 	 gameMap = new GameMap(tiles);
 	 
+	 // set map
 	 gameMap.setMap();
+	 // set cities on map
+	 for(int i=0;i<cities.size();i++)
+	 {
+	   gameMap.tileMap.get(cities.get(i).x).get(cities.get(i).y).city = cities.get(i);
+	 }
+	 
      
 	 // set distances between cities
      storage.setCityDist(cities.get(1), cities.get(0), 1);

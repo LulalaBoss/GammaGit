@@ -106,12 +106,12 @@
 	   {
 	     System.out.println(newWorld.cities.get(i).name + " : " + newWorld.cities.get(j).name + " - " + newWorld.storage.getDegMap(i,j));
 	   }
-	 } 
+	 }	 
    }
    
    public void save()
    {
-     String worldFile = "C:\\Users\\alvin\\Desktop\\Local\\GameLogic\\world.obj";
+     String worldFile = "C:\\Users\\ahsu\\Desktop\\Local\\Logic\\world.obj";
 	 try
 	 {
 	   FileOutputStream fileOut = new FileOutputStream(worldFile);
@@ -129,7 +129,7 @@
      World world = new World();
      try
 	 {
-	   String worldFile = "C:\\Users\\alvin\\Desktop\\Local\\GameLogic\\world.obj";
+	   String worldFile = "C:\\Users\\ahsu\\Desktop\\Local\\Logic\\world.obj";
 	   FileInputStream fileIn = new FileInputStream(worldFile);
 	   ObjectInputStream objectIn = new ObjectInputStream(fileIn);
 	   world = (World) objectIn.readObject();
@@ -154,6 +154,7 @@
 	 System.out.println("- User:");
 	 System.out.println("- * money: " + newWorld.user.money);
 	 System.out.println("- * current locale: " + newWorld.cities.get(newWorld.user.location).name);
+	 System.out.println("- * terrain type: " + newWorld.gameMap.tileMap.get(newWorld.cities.get(newWorld.user.location).x).get(newWorld.cities.get(newWorld.user.location).y).name);
 	 System.out.println("");
 	 for(int i=0;i<newWorld.cities.size();i++){
 	   System.out.println("- City:" + newWorld.cities.get(i).name);

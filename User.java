@@ -8,6 +8,8 @@
  public class User implements Serializable
  {
    public double money;
+   public int localeX;
+   public int localeY;
    public int location;
    public ArrayList<Resource> cargo;
  
@@ -20,6 +22,8 @@
 	 cargo = new ArrayList<Resource>();
 	 
 	 // set default player location
+	 localeX = 1;
+	 localeY = 2;
 	 location = 0;
    }
    

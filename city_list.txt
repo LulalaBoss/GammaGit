@@ -1,7 +1,7 @@
-0 RedwoodCity
-1 Santa Cruz
-2 Coppermine
-3 La Jolla
-4 New Port
-5 San Jose
-6 U'Da
+0 RedwoodCity,1,2
+1 Santa Cruz,1,4
+2 Coppermine,3,4
+3 La Jolla,3,8
+4 New Port,5,1
+5 San Jose,4,5
+6 U'Da,6,6

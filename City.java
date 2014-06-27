@@ -10,6 +10,10 @@
    public int population;
    public ArrayList<Resource> resources;
    
+   // City coordinate on tile based map
+   public int x;
+   public int y;
+   
    // list of goods available in this city
    public ArrayList<Resource> goods;
    
@@ -18,7 +22,7 @@
    public static final int SATISFACTION = 50;
    public int satisfaction;
      
-   public City(Resource r, String n)
+   public City(Resource r, String n, int x, int y)
    {
      // set initial population to 1000
 	 System.out.println("Initializing city...");
@@ -33,6 +37,8 @@
 	 
 	 name = n;
 	 satisfaction = SATISFACTION;
+	 this.x = x;
+	 this.y = y;
    }
    
    public void update()
