@@ -58,7 +58,7 @@ public class Market implements Serializable
 	      double p = marketBoard[i][j];
 		  Tile t = gameMap.tileMap.get(cityDic.get(j).x).get(cityDic.get(j).y);
 		  // updating price
-		  marketBoard[i][j] = (p * (1 - (t.resourceIndex[i]) + t.resourceDemand[i]));         		  
+		  marketBoard[i][j] = (p * (1 + t.resourceDemand[i]));         		  
 	  }
 	}	
 	

@@ -32,7 +32,7 @@
    {
      for(int i=0;i<resourceIndex.length;i++)
 	 {
-	   resourceDemand[i] = resourceDemand[i] + (0.01 * ( 1 - resourceIndex[i] ));
+	   resourceDemand[i] = (0.01 * ( 0.9 - resourceIndex[i] ));
 	 }
    }
    
