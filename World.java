@@ -10,6 +10,7 @@
    public ArrayList<City> cities;
    public ArrayList<Resource> resources;
    public ArrayList<Tile> tiles;
+   public ArrayList<Merchant> merchants;
    public Storage storage;
    public Market market;
    public QuestEngine questEngine;
@@ -25,6 +26,7 @@
 	 cities = new ArrayList<City>();
 	 resources = new ArrayList<Resource>();
 	 tiles = new ArrayList<Tile>();
+	 merchants = new ArrayList<Merchant>();
 	 user = new User();	 
 	 
 	 // read resource_list file
@@ -88,10 +90,30 @@
 	 {
 	   System.out.println("ERROR!! " + e2.getMessage());
      }
+	 
+	 // read merchant_list file
+	 try 
+     {
+	   BufferedReader br3 = new BufferedReader(new FileReader("merchant_list.txt"));
+       String line3 = br3.readLine();
+	   while (line3 != null)
+	   {	        
+	        String[] s = line3.split(",");
+			Merchant temp = new Merchant(s[0],Integer.parseInt(s[1]),Integer.parseInt(s[2]));
+			merchants.add(temp);
+            line3 = br3.readLine();
+        }
+		br3.close();
+		
+     }catch(Exception e3)
+	 {
+	   System.out.println("ERROR!! " + e3.getMessage());
+     }
 	 	 
 	 System.out.println("city size: " + cities.size());
 	 System.out.println("resource size: " + resources.size());
 	 System.out.println("tile size: " + tiles.size());
+	 System.out.println("merchant size: " + merchants.size());
 	 
 	 storage = new Storage(cities,resources);
 	 gameMap = new GameMap(tiles);

@@ -111,7 +111,8 @@
    
    public void save()
    {
-     String worldFile = "C:\\Users\\ahsu\\Desktop\\Local\\Logic\\world.obj";
+     //String worldFile = "C:\\Users\\ahsu\\Desktop\\Local\\Logic\\world.obj";
+	 String worldFile = "C:\\Users\\Alvin\\Desktop\\Local GammaGit\\world.obj";
 	 try
 	 {
 	   FileOutputStream fileOut = new FileOutputStream(worldFile);
